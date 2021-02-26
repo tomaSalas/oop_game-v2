@@ -4,6 +4,8 @@
 
 const divShowPhrase = document.querySelector("#phrase ul");
 
+let matches = []
+
 
  class Phrase {
     constructor(aPhrase) {
@@ -27,34 +29,35 @@ const divShowPhrase = document.querySelector("#phrase ul");
     }
 
     checkLetter(playerInput) {
-        
-        let counter = 0
-        phrase.forEach(char => {
-            if (playerInput.textContent === char.textContent) {
-                this.showMatchedLetter(char, playerInput);
+        this.aPhrase.forEach(char => {
+            if (playerInput.textContent === char) {
+                matches.push(true)
+            } else {
+                matches.push(false)
             }
         });
-        
-        phrase.forEach(char => {
-         console.log(char);
-        });
-        //     // console.log(counter);
-        //     // if (counter > 0) {
-        //     //     console.log("there is a match");
-        //     //     counter = 0;
-        //     //     return true;
-        //     // }
-        //     // else {
-        //     //     console.log("there is no match");
-        //     //     counter = 0;
-        //     //     return false;
-    
-            // }
+            
         
     }
-    showMatchedLetter(char, playerInput) {
-        char.className = `show letter ${playerInput.textContent}`; 
+    showMatchedLetter() {
+        let index = 0;
+        const phrase = document.querySelectorAll("#phrase ul li");
+        console.log(matches);
+        matches.forEach(val => {
+            if (val) {
+                if (!phrase[index].className.includes("show")) {
+                    phrase[index].className = `show letter ${phrase[index].textContent}`;
+                    index += 1;
+                } else {
+                    index += 1;
+                } 
+            } else {
+                index += 1;
             }
+            matches = [];
+
+         });
+    }
 
  }
 

@@ -24,14 +24,11 @@
     
 
     handleInteraction(playerInput) {
-        if (this.activePhrase.checkLetter(playerInput)) {
+        this.activePhrase.checkLetter(playerInput); 
             playerInput.disabled = true;
             playerInput.style.background = "black";
             playerInput.style.color = "black";
-        } else {
-            playerInput.disabled = true;
-            playerInput.className = "wrong";
-        }
+        this.activePhrase.showMatchedLetter();
         
 
     }

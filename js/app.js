@@ -4,7 +4,7 @@
 const startScreen = document.querySelector("#overlay");
 const buttonReset = document.querySelector("#btn__reset");
 const buttons = document.querySelectorAll("#qwerty button");
-const phrase = document.querySelectorAll("#phrase ul li");
+
 
 
 let playerInput = "";
