@@ -24,11 +24,11 @@
     
 
     handleInteraction(playerInput) {
-        this.activePhrase.checkLetter(playerInput); 
+        const arrayAnswer = this.activePhrase.checkLetter(playerInput); 
             playerInput.disabled = true;
             playerInput.style.background = "black";
             playerInput.style.color = "black";
-        this.activePhrase.showMatchedLetter();
+        this.activePhrase.showMatchedLetter(arrayAnswer);
         
 
     }
