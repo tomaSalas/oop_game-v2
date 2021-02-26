@@ -4,7 +4,7 @@
 
 const divShowPhrase = document.querySelector("#phrase ul");
 
-let matches = []
+
 
 
  class Phrase {
@@ -29,6 +29,7 @@ let matches = []
     }
 
     checkLetter(playerInput) {
+        let matches = []
         this.aPhrase.forEach(char => {
             if (playerInput.textContent === char) {
                 matches.push(true)
@@ -36,14 +37,15 @@ let matches = []
                 matches.push(false)
             }
         });
-            
+        return matches;    
         
     }
-    showMatchedLetter() {
+    showMatchedLetter(arr) {
+        
         let index = 0;
         const phrase = document.querySelectorAll("#phrase ul li");
-        console.log(matches);
-        matches.forEach(val => {
+        console.log(arr);
+        arr.forEach(val => {
             if (val) {
                 if (!phrase[index].className.includes("show")) {
                     phrase[index].className = `show letter ${phrase[index].textContent}`;
@@ -54,7 +56,6 @@ let matches = []
             } else {
                 index += 1;
             }
-            matches = [];
 
          });
     }
