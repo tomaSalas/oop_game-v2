@@ -5,8 +5,6 @@
 const divShowPhrase = document.querySelector("#phrase ul");
 
 
-
-
  class Phrase {
     constructor(aPhrase) {
         this.aPhrase = aPhrase.split("");
@@ -18,7 +16,7 @@ const divShowPhrase = document.querySelector("#phrase ul");
         this.aPhrase.forEach(char => {
             if (char === " ") {
                 html += `
-        <li class="hide letter space">${char}</li>`;
+        <li class="space">${char}</li>`;
             } else {
                 html += `
         <li class="hide letter ${char}">${char}</li>`;
@@ -29,36 +27,27 @@ const divShowPhrase = document.querySelector("#phrase ul");
     }
 
     checkLetter(playerInput) {
-        let matches = []
-        this.aPhrase.forEach(char => {
-            if (playerInput.textContent === char) {
-                matches.push(true)
+        let counter = 0
+        this.aPhrase.forEach( char => {
+            if (char === playerInput) {
+                this.showMatchedLetter(char);
             } else {
-                matches.push(false)
+                counter += 1;
             }
         });
-        return matches;    
-        
+        return counter;
     }
-    showMatchedLetter(arr) {
-        
-        let index = 0;
-        const phrase = document.querySelectorAll("#phrase ul li");
-        console.log(arr);
-        arr.forEach(val => {
-            if (val) {
-                if (!phrase[index].className.includes("show")) {
-                    phrase[index].className = `show letter ${phrase[index].textContent}`;
-                    index += 1;
-                } else {
-                    index += 1;
-                } 
-            } else {
-                index += 1;
-            }
 
-         });
+    showMatchedLetter(letterCorrect) {
+        const divShowPhraseLi = document.querySelectorAll("#phrase ul li");
+        divShowPhraseLi.forEach( li => {
+            if (li.textContent === letterCorrect) {
+                li.className = `show letter ${li.textContent}`;
+            }
+        });
+       
     }
+    
 
  }
 

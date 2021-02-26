@@ -3,6 +3,7 @@
  * Game.js */
 
 
+
  class Game {
     constructor(missed = 0, phrases, activePhrase = null) {
         this.missed = missed;
@@ -11,29 +12,39 @@
     }     
 
     startGame() {
-        startScreen.style.visibility = "hidden";
+        startScreen.style.display = "none";
         this.activePhrase = new Phrase(this.phrases[this.getRandomPharse()]);
         this.activePhrase.addPhraseToDisplay();
 
     }
 
     getRandomPharse() {
-        return Math.floor(Math.random() * this.phrases.length);
+        return Math.floor(Math.random() * 1);
     }
 
     
 
     handleInteraction(playerInput) {
-        const arrayAnswer = this.activePhrase.checkLetter(playerInput); 
-            playerInput.disabled = true;
-            playerInput.style.background = "black";
-            playerInput.style.color = "black";
-        this.activePhrase.showMatchedLetter(arrayAnswer);
+        let checkFail = this.activePhrase.checkLetter(playerInput.textContent);
+        playerInput.disabled = true;
+        if (checkFail === this.activePhrase.aPhrase.length) {
+            playerInput.className = "wrong";
+            this.removeLife();
+        } else { 
+            playerInput.style.backgroundColor = "green";
+            playerInput.style.color = "white";
+        } 
+        
+
         
 
     }
     removeLife() {
-
+        const lives = document.querySelector("#scoreboard ol");
+        console.log(lives);
+        lives.removeChild(lives.lastChild);
+        console.log(lives);
+   
     }
     checkForWin() {}
 
