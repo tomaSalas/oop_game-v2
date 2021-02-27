@@ -19,7 +19,7 @@
     }
 
     getRandomPharse() {
-        return Math.floor(Math.random() * 1);
+        return Math.floor(Math.random() * data.length);
     }
 
     
@@ -29,25 +29,74 @@
         playerInput.disabled = true;
         if (checkFail === this.activePhrase.aPhrase.length) {
             playerInput.className = "wrong";
+            this.missed += 1;
             this.removeLife();
         } else { 
             playerInput.style.backgroundColor = "green";
             playerInput.style.color = "white";
         } 
         
-
+        this.checkForWin();
         
 
     }
     removeLife() {
-        const lives = document.querySelector("#scoreboard ol");
-        console.log(lives);
-        lives.removeChild(lives.lastChild);
-        console.log(lives);
+        for (let i = 0; i < lives.length; i += 1) {
+            if (lives[i].getAttribute("src") === "images/liveHeart.png") {
+                lives[i].setAttribute("src", "images/lostHeart.png");
+                break;
+            }
+            
+        }
    
     }
-    checkForWin() {}
+    checkForWin() {
+        let checkMatchLetter = 0
+        const phraseListLi = document.querySelectorAll("#phrase ul li");
+        phraseListLi.forEach( li => {
+            if (li.className === `space`) {
+                checkMatchLetter += 1
+            } else if (li.className === `show letter ${li.textContent}`) {
+                checkMatchLetter += 1
+            }
+        });
+        if (checkMatchLetter === phraseListLi.length) {
+            this.gameOver(true);
+        } else if (this.missed === 5) {
+            this.gameOver(false);
+        }
+    }
 
-    gameOver() {}
+    gameOver(bool) {
+        const h1 = startScreen.querySelector("#game-over-message");
+        const word = document.createElement("h6");
+        word.innerHTML = `<b>The phrase:</b> ${this.activePhrase.aPhrase.join("")}`
+        if (bool) {
+            h1.textContent = "You won the game, you are awesome!";
+            h1.appendChild(word);
+            startScreen.style.display = "";
+            this.reset();
+
+        } else {
+            h1.textContent = "Better luck Next Time!";
+            h1.appendChild(word);
+            startScreen.style.display = "";
+            this.reset();
+        }
+        
+    }
+
+    reset() {
+        lives.forEach(img => {
+            img.setAttribute("src", "images/liveHeart.png")
+        });
+        divShowPhrase.innerHTML = "";
+        buttons.forEach(button => {
+            button.disabled = false;
+            button.className = "key";
+            button.removeAttribute("style");
+            this.missed = 0
+        });
+    }
 
  }

@@ -1,11 +1,6 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
-const startScreen = document.querySelector("#overlay");
-const buttonStarGame = document.querySelector("#btn__reset");
-const buttons = document.querySelectorAll("#qwerty button");
-
-
 
 const game = new Game(undefined, data, undefined);
 
