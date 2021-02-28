@@ -6,8 +6,9 @@ const divShowPhrase = document.querySelector("#phrase ul");
 
 
  class Phrase {
-    constructor(aPhrase) {
-        this.aPhrase = aPhrase.split("");
+    constructor(obj) {
+        this.aPhrase = obj.phrase.split("");
+        this.author = obj.author;
     }
 
     addPhraseToDisplay() {
@@ -22,7 +23,11 @@ const divShowPhrase = document.querySelector("#phrase ul");
         <li class="hide letter ${char}">${char}</li>`;
             }
         });
+        const authorElement = document.createElement("h3");
+        authorElement.innerHTML = ` Author: <i>${this.author}</i>`;
+        authorElement.style.marginTop = "40px";
         divShowPhrase.insertAdjacentHTML("afterbegin", html); 
+        divShowPhrase.appendChild(authorElement);
 
     }
 

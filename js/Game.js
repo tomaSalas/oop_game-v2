@@ -5,10 +5,12 @@
 
 
  class Game {
-    constructor(missed = 0, phrases, activePhrase = null) {
+    constructor(missed = 0, phrases, activePhrase = null, letterGuest = [], numberOfTries = 0) {
         this.missed = missed;
         this.phrases = phrases;
         this.activePhrase = activePhrase;
+        this.letterGuest = letterGuest;
+        this.numberOfTries = numberOfTries;
     }     
 
     startGame() {
@@ -25,18 +27,56 @@
     
 
     handleInteraction(playerInput) {
+        let checkFail = 0
+       if (playerInput.textContent) {
+        this.letterGuest.push(playerInput.textContent);
         let checkFail = this.activePhrase.checkLetter(playerInput.textContent);
         playerInput.disabled = true;
         if (checkFail === this.activePhrase.aPhrase.length) {
             playerInput.className = "wrong";
+            console.log("its being fire click event")
+            console.log(this.missed);
             this.missed += 1;
+            console.log(this.missed);
             this.removeLife();
         } else { 
             playerInput.style.backgroundColor = "green";
             playerInput.style.color = "white";
-        } 
-        
+        }    
         this.checkForWin();
+
+       } else {
+        this.letterGuest.push(playerInput);
+            let checkFail = this.activePhrase.checkLetter(playerInput);
+            if (checkFail === this.activePhrase.aPhrase.length) {
+                for (let i = 0; i < buttons.length; i += 1) {
+                    if (buttons[i].textContent === playerInput) {
+                        buttons[i].className = "wrong";
+                        buttons[i].disabled = true;
+                        console.log("its being fire keydown event");
+                        console.log(this.missed);
+                        this.missed += 1;
+                        console.log(this.missed);
+                        this.removeLife();
+                        break;
+                    }
+                   
+                }
+            } else { 
+                for (let i = 0; i < buttons.length; i += 1) {
+                    if (buttons[i].textContent === playerInput) {
+                        buttons[i].style.backgroundColor = "green";
+                        buttons[i].style.color = "white";
+                        buttons[i].disabled = true;
+                        break;
+                    }
+            
+                
+                }
+            } 
+            
+            this.checkForWin();  
+       } 
         
 
     }
@@ -60,9 +100,12 @@
                 checkMatchLetter += 1
             }
         });
+
         if (checkMatchLetter === phraseListLi.length) {
+            this.numberOfTries += 1;
             this.gameOver(true);
         } else if (this.missed === 5) {
+            this.numberOfTries = 0;
             this.gameOver(false);
         }
     }
@@ -70,7 +113,9 @@
     gameOver(bool) {
         const h1 = startScreen.querySelector("#game-over-message");
         const word = document.createElement("h6");
-        word.innerHTML = `<b>The phrase:</b> ${this.activePhrase.aPhrase.join("")}`
+        word.innerHTML = `<b>The phrase to hunt was: \"<i>${this.activePhrase.aPhrase.join("")}</i>\"<br>
+        If you guess five consecutive phrases, a super-secret message will pop on the screen! Are you up for the challenge? <br><br><br>
+        ${this.numberOfTries} out of 5`
         if (bool) {
             h1.textContent = "You won the game, you are awesome!";
             h1.appendChild(word);
@@ -80,6 +125,7 @@
         } else {
             h1.textContent = "Better luck Next Time!";
             h1.appendChild(word);
+            this.randomBackground();
             startScreen.style.display = "";
             this.reset();
         }
@@ -95,8 +141,23 @@
             button.disabled = false;
             button.className = "key";
             button.removeAttribute("style");
-            this.missed = 0
+            
         });
+        
+        this.letterGuest = [];
+        this.missed = 0;
+
+        window.removeEventListener("keydown", keydownEventHandler);
+    }
+
+    randomBackground() {
+        {
+            var x = Math.floor(Math.random() * 256);
+            var y = Math.floor(Math.random() * 256);
+            var z = Math.floor(Math.random() * 256);
+            var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+            startScreen.style.backgroundColor = bgColor;
+          }
     }
 
  }
