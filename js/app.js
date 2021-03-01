@@ -20,16 +20,9 @@ function keydownEventHandler(event) {
 
 
 //adds interaction when start button is click. Here is where the actual game starts. 
-//the "game.startGame()" and "game.handleInteraction(playerInput)" are call 
+//the "game.startGame()" and game.handleInteraction(playerInput) are implemented
 function clickEventHandler (event) {
     game.startGame();
-    buttons.forEach( button => {
-        button.addEventListener("click", (event) => {
-        let playerInput = event.target;
-        game.handleInteraction(playerInput);
-        });
-    });
-
     // adds interaction for the keydown only when the star button is press
     window.addEventListener("keydown", keydownEventHandler);
 }
@@ -66,6 +59,15 @@ const game = new Game(undefined, data, undefined, undefined, undefined);
 
 // add interactions to the button that starts the game
 buttonStarGame.addEventListener("click", clickEventHandler);
+
+// event handler for the click 
+buttons.forEach( button => {
+    button.addEventListener("click", (event) => {
+        console.log("event ws fire not deleted");
+    let playerInput = event.target;
+    game.handleInteraction(playerInput);
+    });
+});
 
 
 

@@ -25,7 +25,6 @@
             this.activePhrase.addPhraseToDisplay();
             startScreen.style.display = "none";
         }
-
     }
 // gets a random phrase from the obj data
     getRandomPharse() {
@@ -45,6 +44,8 @@
         this.letterGuest.push(playerInput.textContent);
         // store the wrong matches in the var
         let checkFail = this.activePhrase.checkLetter(playerInput.textContent);
+        console.log(checkFail);
+        console.log(this.activePhrase.aPhrase.length);
         // disable the click button
         playerInput.disabled = true;
         // if the number of fail matches equals the lenght of the array it means that the player input does not
@@ -66,7 +67,7 @@
         this.letterGuest.push(playerInput);
         // this part deals with the event handler keydown
         // similar to the click eventbut playerInput does not have a direct access to the button classes
-        // so everthing time the keydown evennt is activated it will change the class associated with that key depending 
+        // so every time the keydown evennt is activated it will change the class associated with that key depending 
         //if the letter press down is contain in the phrase
             let checkFail = this.activePhrase.checkLetter(playerInput);
             if (checkFail === this.activePhrase.aPhrase.length) {
@@ -189,7 +190,6 @@
         this.letterGuest = [];
         this.missed = 0;
         window.removeEventListener("keydown", keydownEventHandler);
-        window.removeEventListener("click", clickEventHandler);
     }
     // adds a background color for start game screen
     randomBackground() {
