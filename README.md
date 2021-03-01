@@ -1,2 +1,4 @@
 # oop_game-v2
  A pharse hunter game that uses JavaScript, HTML and CSS
+
+I when overboard a little bit when it came to making this project my own. I added restrictions for the key-down events, so the user wasn't able to press keys that are not intended. I also added styles if the user correctly guesses a letter. To make the game more fun and a little bit easier, I added a context clue for each phrase( the phrase are hard), basically the name of the person that is being attributed to it.  I also added a sense of achievement. If the player guesses four phrases correctly consecutive, they gain the chance to learn a very super-secret phrase.  
