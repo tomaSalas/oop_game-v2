@@ -1,3 +1,4 @@
+/// the data the game uses
 const data = [
     {
         phrase: "aspire to inspire before we expire",
@@ -51,7 +52,13 @@ const data = [
 
 
 ]
-
+// dont read this is a secret!!!!!!!!!!!
+const secret =   {
+    phrase: "you are incredible",
+    author: "Pogrammer of this game"
+}
+// all the information that needs to be retreive from the page at the biginning
+const divShowPhrase = document.querySelector("#phrase ul");
 const startScreen = document.querySelector("#overlay");
 const buttonStarGame = document.querySelector("#btn__reset");
 const buttons = document.querySelectorAll("#qwerty button");

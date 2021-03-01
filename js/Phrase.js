@@ -2,15 +2,15 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-const divShowPhrase = document.querySelector("#phrase ul");
 
 
+// Phrase obj is need it for changing the status of the classes in the document
  class Phrase {
     constructor(obj) {
-        this.aPhrase = obj.phrase.split("");
+        this.aPhrase = obj.phrase.split(""); // split method seperates the string in to an array of strings 
         this.author = obj.author;
     }
-
+// add phrases to display in the document depeding on the phrase that was pass to the phrase obj
     addPhraseToDisplay() {
         let html = ``;
 
@@ -30,7 +30,9 @@ const divShowPhrase = document.querySelector("#phrase ul");
         divShowPhrase.appendChild(authorElement);
 
     }
-
+// check method checks to see if any letter that the player inputs matches any letter in the array of strings
+// if a match is found, the class for that letter in the array is change to show
+// if a match is not found a counter var is increase and return to the method call "handlerInteractions"
     checkLetter(playerInput) {
         let counter = 0
         this.aPhrase.forEach( char => {
@@ -42,7 +44,7 @@ const divShowPhrase = document.querySelector("#phrase ul");
         });
         return counter;
     }
-
+// makes the change for the class from hiden to show depdening if the letter is match in the previos method
     showMatchedLetter(letterCorrect) {
         const divShowPhraseLi = document.querySelectorAll("#phrase ul li");
         divShowPhraseLi.forEach( li => {
