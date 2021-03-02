@@ -6,15 +6,15 @@
 
 // Phrase obj is need it for changing the status of the classes in the document
  class Phrase {
-    constructor(obj) {
-        this.aPhrase = obj.phrase.split(""); // split method seperates the string in to an array of strings 
-        this.author = obj.author;
+    constructor(phrase) {
+        this.phrase = phrase.phrase.split(""); // split method seperates the string in to an array of strings 
+        this.author = phrase.author;
     }
 // add phrases to display in the document depeding on the phrase that was pass to the phrase obj
     addPhraseToDisplay() {
         let html = ``;
 
-        this.aPhrase.forEach(char => {
+        this.phrase.forEach(char => {
             if (char === " ") {
                 html += `
         <li class="space">${char}</li>`;
@@ -35,7 +35,7 @@
 // if a match is not found a counter var is increase and return to the method call "handlerInteractions"
     checkLetter(playerInput) {
         let counter = 0
-        this.aPhrase.forEach( char => {
+        this.phrase.forEach( char => {
             if (char === playerInput) {
                 this.showMatchedLetter(char);
             } else {

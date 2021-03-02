@@ -5,7 +5,7 @@
 
 // create a game obj
  class Game {
-    constructor(missed = 0, phrases, activePhrase = null, letterGuest = [], numberOfTries = 0, secret = false, guest = false) {
+    constructor(missed = 0, phrases = undefined, activePhrase = null, letterGuest = [], numberOfTries = 0, secret = false, guest = false) {
         this.missed = missed;
         this.phrases = phrases;
         this.activePhrase = activePhrase;
@@ -45,12 +45,12 @@
         // store the wrong matches in the var
         let checkFail = this.activePhrase.checkLetter(playerInput.textContent);
         console.log(checkFail);
-        console.log(this.activePhrase.aPhrase.length);
+        console.log(this.activePhrase.phrase.length);
         // disable the click button
         playerInput.disabled = true;
         // if the number of fail matches equals the lenght of the array it means that the player input does not
         // match any letteters. If this is the case remove a life
-        if (checkFail === this.activePhrase.aPhrase.length) {
+        if (checkFail === this.activePhrase.phrase.length) {
             playerInput.className = "wrong";
             this.missed += 1;
             this.removeLife();
@@ -70,7 +70,7 @@
         // so every time the keydown evennt is activated it will change the class associated with that key depending 
         //if the letter press down is contain in the phrase
             let checkFail = this.activePhrase.checkLetter(playerInput);
-            if (checkFail === this.activePhrase.aPhrase.length) {
+            if (checkFail === this.activePhrase.phrase.length) {
                 for (let i = 0; i < buttons.length; i += 1) {
                     //wrong letter
                     if (buttons[i].textContent === playerInput) {
@@ -154,7 +154,7 @@
             this.guest = false;
         } else {
         // all other phrases  guests
-            word.innerHTML = `<b>The phrase to hunt was: \"<i>${this.activePhrase.aPhrase.join("")}</i>\"<br>
+            word.innerHTML = `<b>The phrase to hunt was: \"<i>${this.activePhrase.phrase.join("")}</i>\"<br>
             Guess consecutive phrases, a super-secret message will pop on the screen! Are you up for the challenge? <br><br><br>
         ${this.numberOfTries} out of 4`;
         }
